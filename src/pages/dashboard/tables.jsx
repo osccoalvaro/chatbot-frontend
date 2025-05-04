@@ -47,7 +47,7 @@ export function Tables() {
 
   const actualizarEstado = async (idEstudiante, nuevoEstado) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/estudiantes/${idEstudiante}/estado`, {
+      const response = await fetch(`http://localhost:5000/api/estudiantes/${idEstudiante}/estadoAdmision`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -162,14 +162,14 @@ export function Tables() {
                     {showStudents === key && students.length > 0 && (
                       <>
                         <tr>
-                          {["Nro doc.", "Nombres", "Apellido Paterno", "Apellido Materno", "Grado", "Imagen doc.", "Libreta", "Estado"].map((header) => (
+                          {["Nro doc.", "Nombres", "Apellido Paterno", "Apellido Materno", "Grado", "Imagen doc.", "Libreta", "Admisión"].map((header) => (
                             <th key={header} className="py-2 px-5 text-left text-xs font-bold uppercase text-blue-gray-500">
                               {header}
                             </th>
                           ))}
                           <th colSpan={5}></th>
                         </tr>
-                        {students.map(({ dni, nombre, apellidoPaterno, apellidoMaterno, grado, imagen, imagenLibreta, estadoAdmision, _id }, key) => (
+                        {students.map(({ dni, nombre, apellidoPaterno, apellidoMaterno, grado, imagen, imagenLibreta, estadoAdmision, pagoMatricula, _id }, key) => (
                           <tr key={_id}>
                             <td className="py-1 px-5">
                               <Typography variant="small" color="blue-gray" className="font-semibold">
@@ -213,6 +213,10 @@ export function Tables() {
                         />
                       </td>
                       <td className="py-1 px-5">
+                      <Typography className={`text-sm font-normal ${pagoMatricula ? "text-green-600" : "text-red-600"}`}>
+                        {pagoMatricula ? "Pagado" : "Por pagar"}
+                      </Typography>
+       
                               <Typography className="text-sm font-normal text-blue-gray-600">  {estadoAdmision}</Typography>
 
                               
